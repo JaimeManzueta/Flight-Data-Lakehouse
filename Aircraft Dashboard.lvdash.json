@@ -1,0 +1,774 @@
+{
+  "datasets": [
+    {
+      "name": "bad1ab9f",
+      "displayName": "gold_flight_geographic_activity",
+      "config": {
+        "version": "1.1",
+        "source": "s3_opensky_data.raw_aircraft_schema.gold_flight_geographic_activity",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "88b54b22",
+      "displayName": "gold_flight_activity_hourly",
+      "config": {
+        "version": "1.1",
+        "source": "s3_opensky_data.raw_aircraft_schema.gold_flight_activity_hourly",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "524478e6",
+      "displayName": "gold_aircraft_country_summary",
+      "config": {
+        "version": "1.1",
+        "source": "s3_opensky_data.raw_aircraft_schema.gold_aircraft_country_summary",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "1469d7e3",
+      "displayName": "gold_aircraft_altitude_summary",
+      "config": {
+        "version": "1.1",
+        "source": "s3_opensky_data.raw_aircraft_schema.gold_aircraft_altitude_summary",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    },
+    {
+      "name": "f1f37750",
+      "displayName": "silver_opensky_states",
+      "config": {
+        "version": "1.1",
+        "source": "s3_opensky_data.raw_aircraft_schema.silver_opensky_states",
+        "dimensions": [
+          {
+            "expr": "source.*"
+          }
+        ],
+        "measures": [
+          {
+            "name": "count",
+            "expr": "COUNT(*)",
+            "comment": "Represents the total number of rows in the dataset. Use this measure to count all",
+            "displayName": "Count"
+          }
+        ]
+      }
+    }
+  ],
+  "pages": [
+    {
+      "name": "46b7f2dc",
+      "displayName": "Flight Activity Overview",
+      "layout": [
+        {
+          "widget": {
+            "name": "total_observations",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "88b54b22",
+                  "fields": [
+                    {
+                      "name": "sum(total_observations)",
+                      "expression": "SUM(`total_observations`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Total Observations"
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(total_observations)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "airborne_aircraft",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "88b54b22",
+                  "fields": [
+                    {
+                      "name": "sum(airborne_count)",
+                      "expression": "SUM(`airborne_count`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Airborne Aircraft",
+                  "fields": []
+                }
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(airborne_count)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 3,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "on_ground_aircraft",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "88b54b22",
+                  "fields": [
+                    {
+                      "name": "sum(on_ground_count)",
+                      "expression": "SUM(`on_ground_count`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "On-Ground Aircraft"
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(on_ground_count)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "distinct_aircraft",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "88b54b22",
+                  "fields": [
+                    {
+                      "name": "sum(distinct_aircraft)",
+                      "expression": "SUM(`distinct_aircraft`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Distinct Aircraft"
+              },
+              "version": 2,
+              "widgetType": "counter",
+              "encodings": {
+                "value": {
+                  "fieldName": "sum(distinct_aircraft)",
+                  "rowNumber": 0
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 9,
+            "y": 0,
+            "width": 3,
+            "height": 2
+          }
+        },
+        {
+          "widget": {
+            "name": "observations_over_time",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "88b54b22",
+                  "fields": [
+                    {
+                      "name": "daily(position_date)",
+                      "expression": "DATE_TRUNC(\"DAY\", `position_date`)"
+                    },
+                    {
+                      "name": "sum(total_observations)",
+                      "expression": "SUM(`total_observations`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Observations Over Time"
+              },
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "daily(position_date)",
+                  "displayName": "Day",
+                  "scale": {
+                    "type": "temporal"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_observations)",
+                  "displayName": "total_observations",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 2,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "top_countries",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "524478e6",
+                  "fields": [
+                    {
+                      "name": "origin_country",
+                      "expression": "`origin_country`"
+                    },
+                    {
+                      "name": "sum(total_observations)",
+                      "expression": "SUM(`total_observations`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Top Countries by Observations"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "origin_country",
+                  "displayName": "origin_country",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_observations)",
+                  "displayName": "total_observations",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "origin_country",
+                  "displayName": "origin_country",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 2,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "altitude_band_observations",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "1469d7e3",
+                  "fields": [
+                    {
+                      "name": "altitude_band",
+                      "expression": "`altitude_band`"
+                    },
+                    {
+                      "name": "sum(total_observations)",
+                      "expression": "SUM(`total_observations`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": {
+                  "value": "Observations by Altitude Band",
+                  "fields": []
+                }
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "altitude_band",
+                  "displayName": "altitude_band",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(total_observations)",
+                  "displayName": "total_observations",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "altitude_band",
+                  "displayName": "altitude_band",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 8,
+            "width": 4,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "velocity_by_altitude",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "1469d7e3",
+                  "fields": [
+                    {
+                      "name": "altitude_band",
+                      "expression": "`altitude_band`"
+                    },
+                    {
+                      "name": "avg(avg_velocity_mps)",
+                      "expression": "AVG(`avg_velocity_mps`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Avg Velocity by Altitude Band"
+              },
+              "version": 3,
+              "widgetType": "bar",
+              "encodings": {
+                "x": {
+                  "fieldName": "altitude_band",
+                  "displayName": "altitude_band",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "avg(avg_velocity_mps)",
+                  "displayName": "avg_velocity_mps",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "altitude_band",
+                  "displayName": "altitude_band",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 4,
+            "y": 8,
+            "width": 4,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "airborne_by_hour",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "88b54b22",
+                  "fields": [
+                    {
+                      "name": "position_hour",
+                      "expression": "`position_hour`"
+                    },
+                    {
+                      "name": "sum(airborne_count)",
+                      "expression": "SUM(`airborne_count`)"
+                    }
+                  ],
+                  "disaggregated": false
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Airborne Count by Hour of Day"
+              },
+              "version": 3,
+              "widgetType": "line",
+              "encodings": {
+                "x": {
+                  "fieldName": "position_hour",
+                  "displayName": "position_hour",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                },
+                "y": {
+                  "fieldName": "sum(airborne_count)",
+                  "displayName": "airborne_count",
+                  "scale": {
+                    "type": "quantitative"
+                  }
+                },
+                "color": {
+                  "fieldName": "position_hour",
+                  "displayName": "position_hour",
+                  "scale": {
+                    "type": "categorical"
+                  }
+                }
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 8,
+            "y": 8,
+            "width": 4,
+            "height": 7
+          }
+        },
+        {
+          "widget": {
+            "name": "country_summary_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "524478e6",
+                  "fields": [
+                    {
+                      "name": "origin_country",
+                      "expression": "`origin_country`"
+                    },
+                    {
+                      "name": "total_observations",
+                      "expression": "`total_observations`"
+                    },
+                    {
+                      "name": "airborne_count",
+                      "expression": "`airborne_count`"
+                    },
+                    {
+                      "name": "on_ground_count",
+                      "expression": "`on_ground_count`"
+                    },
+                    {
+                      "name": "distinct_aircraft",
+                      "expression": "`distinct_aircraft`"
+                    },
+                    {
+                      "name": "avg_velocity_mps",
+                      "expression": "`avg_velocity_mps`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Country Summary"
+              },
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "origin_country"
+                  },
+                  {
+                    "fieldName": "total_observations"
+                  },
+                  {
+                    "fieldName": "airborne_count"
+                  },
+                  {
+                    "fieldName": "on_ground_count"
+                  },
+                  {
+                    "fieldName": "distinct_aircraft"
+                  },
+                  {
+                    "fieldName": "avg_velocity_mps"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 0,
+            "y": 15,
+            "width": 6,
+            "height": 6
+          }
+        },
+        {
+          "widget": {
+            "name": "geo_activity_table",
+            "queries": [
+              {
+                "name": "main_query",
+                "query": {
+                  "datasetName": "bad1ab9f",
+                  "fields": [
+                    {
+                      "name": "lat_bin",
+                      "expression": "`lat_bin`"
+                    },
+                    {
+                      "name": "lon_bin",
+                      "expression": "`lon_bin`"
+                    },
+                    {
+                      "name": "total_observations",
+                      "expression": "`total_observations`"
+                    },
+                    {
+                      "name": "airborne_count",
+                      "expression": "`airborne_count`"
+                    },
+                    {
+                      "name": "avg_altitude_m",
+                      "expression": "`avg_altitude_m`"
+                    },
+                    {
+                      "name": "distinct_aircraft",
+                      "expression": "`distinct_aircraft`"
+                    }
+                  ],
+                  "disaggregated": true
+                }
+              }
+            ],
+            "spec": {
+              "frame": {
+                "showTitle": true,
+                "title": "Geographic Activity"
+              },
+              "version": 2,
+              "widgetType": "table",
+              "encodings": {
+                "columns": [
+                  {
+                    "fieldName": "lat_bin"
+                  },
+                  {
+                    "fieldName": "lon_bin"
+                  },
+                  {
+                    "fieldName": "total_observations"
+                  },
+                  {
+                    "fieldName": "airborne_count"
+                  },
+                  {
+                    "fieldName": "avg_altitude_m"
+                  },
+                  {
+                    "fieldName": "distinct_aircraft"
+                  }
+                ]
+              },
+              "data": {
+                "queryName": "main_query"
+              }
+            }
+          },
+          "position": {
+            "x": 6,
+            "y": 15,
+            "width": 6,
+            "height": 6
+          }
+        }
+      ],
+      "pageType": "PAGE_TYPE_CANVAS",
+      "layoutVersion": "GRID_V1"
+    }
+  ],
+  "uiSettings": {
+    "theme": {
+      "widgetHeaderAlignment": "ALIGNMENT_UNSPECIFIED"
+    },
+    "applyModeEnabled": false
+  }
+}
