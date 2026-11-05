@@ -47,4 +47,8 @@ AWS S3 · Databricks · PySpark · Delta Lake · Lakeflow Declarative Pipelines
 ## Data Source
  
 [OpenSky Network](https://opensky-network.org/)
+
+## Dashboard:
+<img width="2217" height="1101" alt="image" src="https://github.com/user-attachments/assets/b00ca084-e956-42be-b06e-23cfcb2206e3" />
+
  
